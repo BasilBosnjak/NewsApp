@@ -1,50 +1,33 @@
 <div class="container-fluid">
     <h1 class="mt-1">Latest News</h1>
-<!-- Placeholder News Articles -->
-<div class="card mb-4">
-    <img src="assets/theresa.jpg" class="card-img-top" alt="Placeholder Image" style="width: 300px; height: 200px;">
-    <div class="card-body">
-        <h2 class="card-title">Theresa May to step down as PM at general election</h2>
-        <p class="card-text">Former PM says she wants to focus on causes close to her heart after 27 years in parliament</p>
-        <a href="article.html" class="btn btn-primary">Read more</a>
-    </div>
+    <!-- Placeholder News Articles -->
+    <!-- ... -->
+    <!-- Add more articles as needed -->
+    <div class="articles-container"></div> <!-- New div for articles -->
 </div>
 
-<div class="card mb-4">
-    <img src="assets/Nurkic.jpg" class="card-img-top" alt="Placeholder Image" style="width: 300px; height: 200px;">
-    <div class="card-body">
-        <h2 class="card-title">Jusuf Nurkic pulls down Suns-record 31 rebounds vs. Thunder</h2>
-        <p class="card-text">Jusuf Nurkic pulled down a franchise-high 31 rebounds, the most by any player since the 2010-11 season</p>
-        <a href="#" class="btn btn-primary">Read more</a>
-    </div>
-</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$.ajax({
+    url: 'json/articles.json',
+    dataType: 'json',
+    success: function(articles) {
+        let articlesHTML = '';
 
-<!-- Add more articles as needed --> <!-- Page content-->
+        articles.forEach(article => {
+            articlesHTML += `
+                <div class="card mb-4">
+                    <img src="${article.image}" class="card-img-top" alt="${article.title}" style="width: 300px; height: 200px;">
+                    <div class="card-body">
+                        <h2 class="card-title">${article.title}</h2>
+                        <p class="card-text">${article.description}</p>
+                        <a href="${article.link}" class="btn btn-primary">Read more</a>
+                    </div>
+                </div>
+            `;
+        });
 
-<!-- Placeholder News Articles -->
-<div class="card mb-4">
-    <img src="assets/united.jpg" class="card-img-top" alt="Placeholder Image" style="width: 300px; height: 200px;">
-    <div class="card-body">
-        <h2 class="card-title">United to pause pilot hiring, citing Boeing’s delivery delays</h2>
-        <p class="card-text">United Airlines will pause pilot hiring this spring because of Boeing delivery delays, the latest effect of the plane maker’s problems on one of its biggest customers.</p>
-        <a href="#" class="btn btn-primary">Read more</a>
-    </div>
-</div>
-
-<div class="card mb-4">
-    <img src="assets/nikon.jpg" class="card-img-top" alt="Placeholder Image" style="width: 300px; height: 200px;">
-    <div class="card-body">
-        <h2 class="card-title">Nikon is acquiring US camera manufacturer RED</h2>
-        <p class="card-text">RED will become a subsidiary of Nikon as it attempts to expand into the digital cinema camera market.</p>
-        <a href="#" class="btn btn-primary">Read more</a>
-    </div>
-</div>
-
-<div class="card mb-4">
-    <img src="assets/deadpool.jpg" class="card-img-top" alt="Placeholder Image" style="width: 300px; height: 200px;">
-    <div class="card-body">
-        <h2 class="card-title">First 'Deadpool & Wolverine' Teaser Debuts During The Big Game</h2>
-        <p class="card-text">Marvel Studios’ DEADPOOL & WOLVERINE opens in U.S. & Canadian movie theaters on July 26, and will be available in IMAX, RealD 3D, Dolby Cinema, 4DX, Cinemark XD, and premium screens everywhere.</p>
-        <a href="#" class="btn btn-primary">Read more</a>
-    </div>
-</div>
+        document.querySelector('.articles-container').innerHTML += articlesHTML;
+    }
+});
+</script>

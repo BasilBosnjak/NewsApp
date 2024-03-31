@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <link rel="icon" type="image/x-icon" href="assets/newspaper.svg" />
     <!-- Include Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -28,5 +29,27 @@
     </div>
     <!-- Include Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('form').on('submit', function(e) {
+                e.preventDefault();
+        
+                var email = $('#email').val();
+                var password = $('#password').val();
+        
+                var storedEmail = localStorage.getItem('email');
+                var storedPassword = localStorage.getItem('password');
+        
+                if(email === storedEmail && password === storedPassword) {
+                    window.location.href = 'admin.html';
+                } else {
+                    alert('Incorrect email and/or password.');
+                }
+            });
+        });
+        </script>
+        
 </body>
 </html>
