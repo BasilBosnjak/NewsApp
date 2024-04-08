@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "title": "Theresa May to step down as PM at general election",
+        "description": "Former PM says she wants to focus on causes close to her heart after 27 years in parliament",
+        "image": "assets/theresa.jpg",
+        "link": "article.html",
+        "tag": "politics"
+    },
+    {
+        "id": 2,
+        "title": "Jusuf Nurkic pulls down Suns-record 31 rebounds vs. Thunder",
+        "description": "Jusuf Nurkic pulled down a franchise-high 31 rebounds, the most by any player since the 2010-11 season",
+        "image": "assets/Nurkic.jpg",
+        "link": "#",
+        "tag": "sports"
+    },
+    {
+        "id": 3,
+        "title": "United to pause pilot hiring, citing Boeing’s delivery delays",
+        "description": "United Airlines will pause pilot hiring this spring because of Boeing delivery delays, the latest effect of the plane maker’s problems on one of its biggest customers.",
+        "image": "assets/united.jpg",
+        "link": "#",
+        "tag": "business"
+    },
+    {
+        "id": 4,
+        "title": "Nikon is acquiring US camera manufacturer RED",
+        "description": "RED will become a subsidiary of Nikon as it attempts to expand into the digital cinema camera market.",
+        "image": "assets/nikon.jpg",
+        "link": "#",
+        "tag": "tech"
+    },
+    {
+        "id": 5,    
+        "title": "First 'Deadpool & Wolverine' Teaser Debuts During The Big Game",
+        "description": "Marvel Studios’ DEADPOOL & WOLVERINE opens in U.S. & Canadian movie theaters on July 26, and will be available in IMAX, RealD 3D, Dolby Cinema, 4DX, Cinemark XD, and premium screens everywhere.",
+        "image": "assets/deadpool.jpg",
+        "link": "#",
+        "tag": "entertainment"
+    }
+]

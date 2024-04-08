@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In Page</title>
+    <title>Sign Up Page</title>
+    <link rel="icon" type="image/x-icon" href="assets/newspaper.svg" />
     <!-- Include Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -11,8 +12,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <h2 class="text-center mt-5">Sign In</h2>
-                <form action="login.html">
+                <h2 class="text-center mt-5">Sign Up</h2>
+                <form id="signUp">
                     <div class="form-group">
                         <label for="name">Full Name</label>
                         <input type="text" class="form-control" id="name" placeholder="Enter full name">
@@ -36,5 +37,31 @@
     </div>
     <!-- Include Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#signUp').on('submit', function(e) {
+                e.preventDefault();
+
+                var name = $('#name').val();
+                var email = $('#email').val();
+                var password = $('#password').val();
+
+                if (!name || !email || !password) {
+                    alert('Please fill all fields.');
+                    return;
+                }
+
+                localStorage.setItem('name', name);
+                localStorage.setItem('email', email);
+                localStorage.setItem('password', password);
+
+                alert('Registration successful! Please log in to continue.');
+
+                window.location.href = 'login.html';
+            });
+        });
+    </script>
 </body>
 </html>

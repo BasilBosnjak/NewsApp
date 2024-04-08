@@ -1,0 +1,14 @@
+[
+    {
+        "fullName": "John Doe",
+        "email": "elda@jaha.com",
+        "password": "elda",
+        "role": "user"
+    },
+    {
+        "fullName": "Admin User",
+        "email": "admin@admin.com",
+        "password": "admin",
+        "role": "admin"
+    }
+]
