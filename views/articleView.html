@@ -27,14 +27,10 @@
           <h2>Comments</h2>
           <form>
             <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" class="form-control" id="name">
-            </div>
-            <div class="form-group">
               <label for="comment">Comment</label>
               <textarea class="form-control" id="comment" rows="3"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+            <button type="submit" class="btn btn-primary mt-2" onClick="submitComment()">Submit</button>
           </form>
         </div>
       `;
@@ -46,4 +42,16 @@
   $(document).ready(() => {
     getArticleById();
   });
+
+  function submitComment() {
+    // Get the form data
+    var comment = document.getElementById("comment").value;
+
+    // Send data to add_comment.php endpoint
+    RestClient.get("add_comment.php?comment=" + comment, function (response) {
+      console.log(response); 
+    }, function (error) {
+      console.log("Error: " + error);
+    });
+  }
 </script>
