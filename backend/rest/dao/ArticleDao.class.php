@@ -8,8 +8,7 @@ class ArticleDao extends BaseDao {
     }
 
     public function add_article($article){
-        // add logic
-        return $article;
+        return $this->insert("articles", $article);
     }
 
     public function get(){
