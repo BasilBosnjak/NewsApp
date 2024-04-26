@@ -9,7 +9,7 @@
 
 <script>
   $.ajax({
-    url: "json/articles.json",
+    url: "backend/get_all_articles.php",
     dataType: "json",
     success: function (articles) {
       let articlesHTML = "";

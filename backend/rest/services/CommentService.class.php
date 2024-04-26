@@ -6,8 +6,12 @@ class CommentService {
     public function __construct() {
         $this->comment_dao = new CommentDao();
     }
-    public function add_Comment($comment) {
-        return $this->comment_dao->add_Comment($comment);
+    public function add_Comment($comment, $article_id) {
+        return $this->comment_dao->add_Comment($comment, $article_id);
+    }
+
+    public function get_Comments($article_id) {
+        return $this->comment_dao->get_Comments($article_id);
     }
 }
 
