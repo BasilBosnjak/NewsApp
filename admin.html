@@ -138,6 +138,15 @@
                             />
                           </div>
                           <div class="form-group mt-1">
+                            <label for="articleSummary">Summary</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="articleSummary"
+                              placeholder="Enter article summary"
+                            />
+                          </div>
+                          <div class="form-group mt-1">
                             <label for="articleText">Text</label>
                             <textarea
                               class="form-control"
@@ -146,8 +155,8 @@
                               placeholder="Enter article text"
                             ></textarea>
                           </div>
-                          <button type="submit" class="btn btn-primary mt-2">
-                            Submit
+                          <button type="button" class="btn btn-primary mt-2" id="addArticleButton" onClick="submitForm()">
+                            Submit <!--Form submit logic in the sripts.js-->
                           </button>
                         </form>
                       </div>
@@ -371,7 +380,7 @@
           <!-- Bootstrap core JS-->
           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
           <!-- Core theme JS-->
-          <script src="js/scripts.js"></script>
+          <script src="/js/scripts.js"></script>
         </div>
       </div>
     </div>
