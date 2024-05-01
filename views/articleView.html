@@ -1,3 +1,4 @@
+<script src="utils/constants.js"></script>
 <div id="article-container"></div>
 
 <script>
@@ -9,7 +10,7 @@
 
     const article_id = localStorage.getItem("articleId");
     console.log(article_id);
-    RestClient.get("get_articles.php?id=" + article_id, function (data) {
+    RestClient.get("articles/" + article_id, function (data) {
       console.log(data);
 
       document.getElementById("article-container").innerHTML = `

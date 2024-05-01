@@ -7,9 +7,9 @@
   <!-- New div for articles -->
 </div>
 
-<script>
+<script type="module">
   $.ajax({
-    url: "backend/get_all_articles.php",
+    url: Constants.API_BASE_URL + "articles",
     dataType: "json",
     success: function (articles) {
       let articlesHTML = "";
