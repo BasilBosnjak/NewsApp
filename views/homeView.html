@@ -21,7 +21,7 @@
                       <div class="card-body">
                           <h2 class="card-title">${article.title}</h2>
                           <p class="card-text">${article.description}</p>
-                          <a onclick="setArticleId(${article.id})" href="#articleView" class="btn btn-primary">Read more</a>
+                          <button onclick="setArticleId(${article.id})" class="btn btn-primary">Read more</button>
                       </div>  
                   </div>
               `;
@@ -31,7 +31,8 @@
     },
   });
 
-  function setArticleId(articleId) {
+  window.setArticleId = function(articleId)  {
     localStorage.setItem("articleId", articleId);
+    window.location.hash = "articleView";
   }
 </script>
