@@ -1,3 +1,4 @@
+<script src="utils/constants.js"></script>
 <div id="article-container"></div>
 
 <script>
@@ -9,8 +10,8 @@
 
     const article_id = localStorage.getItem("articleId");
     console.log(article_id);
-    RestClient.get("get_articles.php?id=" + article_id, function (data) {
-      console.log(data);
+    RestClient.get("articles/" + article_id, function (data) {
+    //  console.log(data); PRINTS THE DB DATA IN THE CONSOLE
 
       document.getElementById("article-container").innerHTML = `
         <div class="card mb-4">
@@ -40,9 +41,11 @@
       // local storage always stores strings, so Number is used to convert it to a number
       var articleid = Number(localStorage.getItem("articleId"));
 
+      // get comments for the article
       $.ajax({
-      url: "backend/get_comments.php?article_id=" + articleid, // Replace with the path to your script
+      url: Constants.API_BASE_URL + "comments/" + article_id,
       dataType: "json",
+      data: { article_id: articleid },
       success: function (comments) {
         let commentsHTML = "";
 
@@ -73,7 +76,7 @@
     var article_id = localStorage.getItem("articleId");
 
     // Send data to add_comment.php endpoint
-    RestClient.get("add_comment.php?comment=" + comment + "&article_id=" + article_id, function (response) {
+    RestClient.post("comments/", { comment: comment, article_id: article_id}, function (response) {
       console.log(response); 
     }, function (error) {
       console.log("Error: " + error);
