@@ -134,4 +134,5 @@ public function insert($table, $entity)
   }
 
 }
+
 ?>
