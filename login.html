@@ -42,10 +42,14 @@
       </div>
     </div>
     <!-- Include Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <script>
+      var Constants = {
+        API_BASE_URL: "http://localhost/NewsApp/backend/",
+      };
+
       $(document).ready(function () {
         $("form").on("submit", function (e) {
           e.preventDefault();
@@ -54,23 +58,22 @@
           var password = $("#password").val();
 
           $.ajax({
-            url: "json/users.json", // replace with the path to your JSON file
-            dataType: "json",
-            success: function (users) {
-              var user = users.find(
-                (user) => user.email === email && user.password === password
-              );
-
-              if (user) {
-                if (user.role === "admin") {
-                  window.location.href = "admin.html";
-                } else if (user.role === "user") {
-                  window.location.href = "user.html";
-                }
-              } else {
-                alert("Incorrect email and/or password.");
-              }
+            url: Constants.get_api_base_url + 'login',
+            type: "POST",
+            data: {
+              email: email,
+              password: password,
             },
+            success: function (data) {
+              // store role in session storage
+              var isAdmin = data.isAdmin === 1;
+              sessionStorage.setItem("isAdmin", isAdmin);
+
+              window.location.href = "/NewsApp";
+            },
+            error: function (error) {
+              alert("Invalid email or password");
+            }
           });
         });
       });

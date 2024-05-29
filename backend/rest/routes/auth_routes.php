@@ -9,6 +9,7 @@ Flight::set('auth_service', new AuthService());
 /**
  * @OA\Post(
  *     path="/register",
+ *     tags={"Authentication"},
  *     summary="Register a new user",
  *     @OA\RequestBody(
  *         required=true,
@@ -77,6 +78,7 @@ Flight::route('POST /register', function(){
 /**
  * @OA\Post(
  *     path="/login",
+ *     tags={"Authentication"},
  *     summary="Login a user",
  *     @OA\RequestBody(
  *         required=true,
@@ -150,7 +152,7 @@ Flight::route('POST /login', function(){
 
     $token = JWT::encode(
         $jwt_payload,
-        JWT_SECRET,
+        Config::JWT_SECRET(),
         'HS256'
     );
 

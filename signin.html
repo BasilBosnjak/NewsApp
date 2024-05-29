@@ -36,26 +36,38 @@
         </div>
     </div>
     <!-- Include Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <script>
         $(document).ready(function() {
             $('#signUp').on('submit', function(e) {
                 e.preventDefault();
 
-                var name = $('#name').val();
+                var full_name = $('#name').val();
                 var email = $('#email').val();
                 var password = $('#password').val();
+                var confirm_password = $('#confirmPassword').val();
 
-                if (!name || !email || !password) {
+                if (!full_name || !email || !password || !confirm_password) {
                     alert('Please fill all fields.');
                     return;
                 }
 
-                localStorage.setItem('name', name);
-                localStorage.setItem('email', email);
-                localStorage.setItem('password', password);
+                if (password !== confirm_password) {
+                    alert('Passwords do not match.');
+                    return;
+                }
+
+                $.ajax({
+                    url: 'http://localhost/NewsApp/backend/register',
+                    type: 'POST',
+                    data: {
+                        full_name: full_name,
+                        email: email,
+                        password: password
+                    }
+                });
 
                 alert('Registration successful! Please log in to continue.');
 

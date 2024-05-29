@@ -43,7 +43,7 @@
 
       // get comments for the article
       $.ajax({
-      url: Constants.API_BASE_URL + "comments/" + article_id,
+      url: Constants.get_api_base_url + "comments/" + article_id,
       dataType: "json",
       data: { article_id: articleid },
       success: function (comments) {
