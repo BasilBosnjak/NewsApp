@@ -45,10 +45,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+    <script src="utils/constants.js"></script>
     <script>
-      var Constants = {
-        API_BASE_URL: "http://localhost/NewsApp/backend/",
-      };
 
       $(document).ready(function () {
         $("form").on("submit", function (e) {
@@ -58,7 +56,7 @@
           var password = $("#password").val();
 
           $.ajax({
-            url: Constants.get_api_base_url + 'login',
+            url: Constants.get_api_base_url() + 'login',
             type: "POST",
             data: {
               email: email,
