@@ -3,7 +3,7 @@ var Constants = {
     if(location.hostname == 'localhost') {
       return "http://localhost/NewsApp/backend/";
     } else {
-      return "https://oyster-app-v96vv.ondigitalocean.app/backend/";
+      return "https://hammerhead-app-jo24g.ondigitalocean.app/backend/";
     }
   }
 
