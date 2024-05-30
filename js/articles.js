@@ -1,5 +1,5 @@
 $.ajax({
-  url: Constants.get_api_base_url + "articles",
+  url: Constants.get_api_base_url() + "articles",
   dataType: "json",
   success: function (articles) {
     let articlesHTML = "";
