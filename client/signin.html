@@ -61,7 +61,7 @@
 
                 $.ajax({
                     // hosted url
-                    url: 'https://dolphin-app-k6wnf.ondigitalocean.app/backend/register',
+                    url: Constants.get_api_base_url() + 'register',
                     type: 'POST',
                     data: {
                         full_name: full_name,
