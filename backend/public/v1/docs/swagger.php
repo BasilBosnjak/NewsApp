@@ -5,7 +5,7 @@ require __DIR__ . '/../../../vendor/autoload.php';
 if($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.0.1') {
     define('BASE_URL', 'http://localhost/NewsApp/backend');
 } else {
-    define('BASE_URL', 'https://oyster-app-v96vv.ondigitalocean.app/backend');
+    define('BASE_URL', 'https://dolphin-app-k6wnf.ondigitalocean.app/backend');
 }
 
 // define('BASE_URL', 'http://localhost:8018/web-introduction/dentist-backend/');
