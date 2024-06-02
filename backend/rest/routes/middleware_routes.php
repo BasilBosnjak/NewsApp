@@ -13,8 +13,11 @@ Flight::route('/*', function() {
     } else {
         try {
             $token = Flight::request()->getHeader("Authentication");
-            if(!$token)
-            Flight::halt(401, "Missing authentication header");
+            if(!$token) {
+                error_log('401 - The user is not authenticated');
+                Flight::redirect('/login');
+                return false;
+            }
 
             $decoded_token = JWT::decode($token, new Key(Config::JWT_SECRET(), 'HS256'));
 
@@ -22,7 +25,9 @@ Flight::route('/*', function() {
             Flight::set('jwt_token', $token);
             return true;
         } catch (\Exception $e) {
-            Flight::halt(401, $e->getMessage());
+            error_log("Failed to decode JWT token: " . $e->getMessage());
+            Flight::redirect('/login');
+            return false;
         }
     }
 });
