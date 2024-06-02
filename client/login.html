@@ -68,6 +68,21 @@
               localStorage.setItem("isAdmin", isAdmin);
               localStorage.setItem("jwt", data.token);
 
+              // request to the protected route
+              $.ajax({
+                url: Constants.get_api_base_url() + '/articles',
+                type: "GET",
+                headers: {
+                  'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+                },
+                success: function (data) {
+                  // handle the response
+                },
+                error: function (error) {
+                  alert("Please log in to access this page");
+                }
+              });
+
               window.location.href = "./";
             },
             error: function (error) {
