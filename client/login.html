@@ -16,6 +16,7 @@
       <div class="row justify-content-center">
         <div class="col-md-6">
           <h2 class="text-center mt-5">Login</h2>
+          <form>
             <div class="form-group">
               <label for="email">Email address</label>
               <input
@@ -53,6 +54,7 @@
 
           var email = $("#email").val();
           var password = $("#password").val();
+          console.log(email);
 
           $.ajax({
             url: Constants.get_api_base_url() + 'login',
@@ -66,6 +68,7 @@
               var isAdmin = data.isAdmin === 1;
               localStorage.setItem("isAdmin", isAdmin);
               localStorage.setItem("jwt", data.token);
+              console.log(data);
 
               window.location.href = "./";
             },

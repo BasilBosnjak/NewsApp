@@ -1,0 +1,48 @@
+Exception: Invalid email or password in C:\xampp\htdocs\NewsApp\backend\rest\services\AuthService.class.php:21
+Stack trace:
+#0 C:\xampp\htdocs\NewsApp\backend\rest\routes\auth_routes.php(140): AuthService->login('edin@dzeko.com', 'goe sogs')
+#1 [internal function]: {closure}()
+#2 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\core\Dispatcher.php(354): call_user_func_array(Object(Closure), Array)
+#3 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\core\Dispatcher.php(287): flight\core\Dispatcher->invokeCallable(Object(Closure), Array)
+#4 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\Engine.php(522): flight\core\Dispatcher->execute(Object(Closure), Array)
+#5 [internal function]: flight\Engine->_start()
+#6 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\core\Dispatcher.php(379): call_user_func_array(Array, Array)
+#7 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\core\Dispatcher.php(287): flight\core\Dispatcher->invokeCallable(Array, Array)
+#8 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\core\Dispatcher.php(131): flight\core\Dispatcher->execute(Array, Array)
+#9 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\core\Dispatcher.php(95): flight\core\Dispatcher->runEvent('start', Array)
+#10 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\Engine.php(113): flight\core\Dispatcher->run('start', Array)
+#11 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\Flight.php(119): flight\Engine->__call('start', Array)
+#12 C:\xampp\htdocs\NewsApp\backend\index.php(17): Flight::__callStatic('start', Array)
+#13 {main}
+Exception: Invalid email or password in C:\xampp\htdocs\NewsApp\backend\rest\services\AuthService.class.php:21
+Stack trace:
+#0 C:\xampp\htdocs\NewsApp\backend\rest\routes\auth_routes.php(140): AuthService->login('edin@dzeko.com', 'celncce')
+#1 [internal function]: {closure}()
+#2 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\core\Dispatcher.php(354): call_user_func_array(Object(Closure), Array)
+#3 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\core\Dispatcher.php(287): flight\core\Dispatcher->invokeCallable(Object(Closure), Array)
+#4 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\Engine.php(522): flight\core\Dispatcher->execute(Object(Closure), Array)
+#5 [internal function]: flight\Engine->_start()
+#6 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\core\Dispatcher.php(379): call_user_func_array(Array, Array)
+#7 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\core\Dispatcher.php(287): flight\core\Dispatcher->invokeCallable(Array, Array)
+#8 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\core\Dispatcher.php(131): flight\core\Dispatcher->execute(Array, Array)
+#9 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\core\Dispatcher.php(95): flight\core\Dispatcher->runEvent('start', Array)
+#10 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\Engine.php(113): flight\core\Dispatcher->run('start', Array)
+#11 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\Flight.php(119): flight\Engine->__call('start', Array)
+#12 C:\xampp\htdocs\NewsApp\backend\index.php(17): Flight::__callStatic('start', Array)
+#13 {main}
+Exception: Invalid email or password in C:\xampp\htdocs\NewsApp\backend\rest\services\AuthService.class.php:21
+Stack trace:
+#0 C:\xampp\htdocs\NewsApp\backend\rest\routes\auth_routes.php(140): AuthService->login('edin@dzeko.com', 'encsnpvns')
+#1 [internal function]: {closure}()
+#2 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\core\Dispatcher.php(354): call_user_func_array(Object(Closure), Array)
+#3 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\core\Dispatcher.php(287): flight\core\Dispatcher->invokeCallable(Object(Closure), Array)
+#4 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\Engine.php(522): flight\core\Dispatcher->execute(Object(Closure), Array)
+#5 [internal function]: flight\Engine->_start()
+#6 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\core\Dispatcher.php(379): call_user_func_array(Array, Array)
+#7 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\core\Dispatcher.php(287): flight\core\Dispatcher->invokeCallable(Array, Array)
+#8 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\core\Dispatcher.php(131): flight\core\Dispatcher->execute(Array, Array)
+#9 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\core\Dispatcher.php(95): flight\core\Dispatcher->runEvent('start', Array)
+#10 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\Engine.php(113): flight\core\Dispatcher->run('start', Array)
+#11 C:\xampp\htdocs\NewsApp\backend\vendor\flightphp\core\flight\Flight.php(119): flight\Engine->__call('start', Array)
+#12 C:\xampp\htdocs\NewsApp\backend\index.php(17): Flight::__callStatic('start', Array)
+#13 {main}

@@ -11,6 +11,12 @@
   $.ajax({
     url: Constants.get_api_base_url() + "articles",
     dataType: "json",
+    beforeSend: function (xhr) {
+            xhr.setRequestHeader(
+              "Authentication",
+              localStorage.getItem("jwt")
+            );
+        },
     success: function (articles) {
       let articlesHTML = "";
 

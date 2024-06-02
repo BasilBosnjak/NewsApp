@@ -4,6 +4,12 @@ var RestClient = {
       $.ajax({
         url: Constants.get_api_base_url() + url,
         type: "GET",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(
+              "Authentication",
+              localStorage.getItem("jwt")
+            );
+        },
         success: function (response) {
           if (callback) callback(response);
         },
@@ -15,6 +21,12 @@ var RestClient = {
     request: function (url, method, data, callback, error_callback) {
       $.ajax({
         url: Constants.get_api_base_url() + url,
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader(
+            "Authentication",
+            localStorage.getItem("jwt")
+          );
+      },
         type: method,
         data: data,
       })

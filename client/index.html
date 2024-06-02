@@ -103,11 +103,15 @@
 </html>
 
 <script>
-    var app = $.spapp({
+    if (localStorage.getItem("jwt")) {
+        var app = $.spapp({
         defaultView: "#homeView",
         templateDir: "./views/"
+        });
 
-    });
+        app.run();
+    } else {
+        window.location = "login.html";
+    }
 
-    app.run();
 </script>
