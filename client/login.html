@@ -63,9 +63,10 @@
               password: password,
             },
             success: function (data) {
-              // store role in session storage
+              // store role and jwt token in session storage
               var isAdmin = data.isAdmin === 1;
-              sessionStorage.setItem("isAdmin", isAdmin);
+              localStorage.setItem("isAdmin", isAdmin);
+              localStorage.setItem("jwt", data.token);
 
               window.location.href = "./";
             },
