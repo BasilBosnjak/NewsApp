@@ -134,6 +134,13 @@ public function insert($table, $entity)
                          LIMIT {$limit} OFFSET {$offset}", []);
   }
 
+  public function delete($id)
+  {
+    $query = "DELETE FROM " . $this->table . " WHERE id = :id";
+    $stmt = $this->connection->prepare($query);
+    $stmt->execute(['id' => $id]);
+  }
+
 }
 
 ?>

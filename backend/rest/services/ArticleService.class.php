@@ -19,6 +19,14 @@ class ArticleService {
     public function get_article_by_id($id) {
         return $this->article_dao->get_by_id($id);
     }
+
+    public function delete_article($id) {
+        return $this->article_dao->delete_article($id);
+    }
+
+    public function update_article($id, $data) {
+        return $this->article_dao->update_article($id, $data);
+    }
 }
 
 ?>

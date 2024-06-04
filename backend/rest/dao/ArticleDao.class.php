@@ -18,6 +18,14 @@ class ArticleDao extends BaseDao {
     public function get_by_id($article_id){
         return $this->query_unique("SELECT * FROM articles WHERE id = :id", ["id" => $article_id]);
     }
+
+    public function delete_article($id) {
+        return $this->delete($id);
+    }
+
+    public function update_article($id, $data){
+        $this->update($id, $data);
+    }
     
 }
 

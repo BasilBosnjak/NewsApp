@@ -65,4 +65,50 @@
         Flight::json($article);
     });
 
+    /**
+     * @OA\Delete(path="/articles/{id}",
+     * tags={"Articles"},
+     * security={
+     * {"ApiKey": {}}   
+     * },
+     * @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", default=1),
+     * @OA\Response(response="200", description="Delete an article by id")
+     * )
+     */
+
+    Flight::route('DELETE /articles/@id', function($id){
+        $articleService = new ArticleService();
+        $result = $articleService->delete_article($id);
+        Flight::json(['message' => 'Article deleted successfully']);
+    });
+
+    /**
+     * @OA\Put(path="/articles/{id}",
+     * tags={"Articles"},
+     * security={
+     * {"ApiKey": {}}
+     * },
+     * @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", default=1),
+     * @OA\RequestBody(description="Basic article info", required=true,
+     *    @OA\MediaType(mediaType="application/json",
+     *       @OA\Schema(
+     *          @OA\Property(property="title", required="true", type="string", example="My First Article",	description="Title of the article" ),
+     *          @OA\Property(property="category", required="true", type="string", example="News",	description="Category of the article" ),
+     *          @OA\Property(property="summary", required="true", type="string", example="This is a summary of my first article.",	description="Summary of the article" ),
+     *          @OA\Property(property="text", required="true", type="string", example="This is the content of my first article.",	description="Text of the article" ),
+     *          @OA\Property(property="image", type="string", example="https://example.com/image.jpg",	description="Image URL of the article" )
+     *       )
+     *    )
+     * ),
+     * @OA\Response(response="200", description="Update an article by id")
+     * )
+     */
+
+    Flight::route('PUT /articles/@id', function($id){
+        $data = Flight::request()->data->getData();
+        $articleService = new ArticleService();
+        $result = $articleService->update_article($id, $data);
+        Flight::json(['message' => 'Article updated successfully']);
+    });
+
 ?>
