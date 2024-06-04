@@ -4,6 +4,9 @@
     /**
      * @OA\Get(path="/comments/{article_id}",
      * tags={"Comments"},
+     * security={
+     * {"ApiKey": {}}   
+     * },
      * @OA\Parameter(@OA\Schema(type="integer"), in="path", name="article_id", default=1),
      * @OA\Response(response="200", description="Get comments by article id")
      * )
@@ -18,6 +21,9 @@
     /**
      * @OA\Post(path="/comments",
      * tags={"Comments"},
+     * security={
+     * {"ApiKey": {}}   
+     * },
      * @OA\RequestBody(description="Comment object that needs to be added to the store", required=true,
      * @OA\MediaType(mediaType="application/json",
      * @OA\Schema(
