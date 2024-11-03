@@ -1,86 +1,91 @@
-<script src="../utils/constants.js"></script>
+<script src="../client/utils/constants.js"></script>
 <div id="article-container"></div>
 
 <script>
-  function getArticleById() {
-    // if (window.location.hash !== '#articleView') {
-    //   window.removeEventListener('hashchange', getArticleById);
-    //   return;
-    // }
-
-    const article_id = localStorage.getItem("articleId");
-    console.log(article_id);
-    RestClient.get("articles/" + article_id, function (data) {
-    //  console.log(data); PRINTS THE DB DATA IN THE CONSOLE
-
-      document.getElementById("article-container").innerHTML = `
-        <div class="card mb-4">
-          <img src="${data.image}" class="card-img-top" alt="${data.title}" style="max-width: 540px">
-          <div class="card-body">
-              <h2 class="card-title">${data.title}</h2>
-              <p class="card-text">${data.summary}</p>
-              <p class="card-text">${data.text}</p>
+  const jwt = localStorage.getItem("jwt");
+  if (!jwt) {
+    alert("Please Log In to continue");
+    window.location.href = "login.html";
+  } else {
+    function getArticleById() {
+      const article_id = localStorage.getItem("articleId");
+      console.log(article_id);
+      RestClient.get("articles/" + article_id, function (data) {
+        document.getElementById("article-container").innerHTML = `
+          <div class="card mb-4">
+            <img src="${data.image}" class="card-img-top" alt="${data.title}" style="max-width: 540px">
+            <div class="card-body">
+                <h2 class="card-title">${data.title}</h2>
+                <p class="card-text">${data.summary}</p>
+                <p class="card-text">${data.text}</p>
+            </div>
           </div>
-        </div>
-        
-        <!-- Comment Section -->
-        <div class="mt-4">
-          <h2>Comments</h2>
-          <form>
-            <div class="form-group">
-              <div id="comments"></div>
-              <label for="comment">Write a Comment</label>
-              <textarea class="form-control" id="comment" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary mt-2" onClick="submitComment()">Submit</button>
-          </form>
-        </div>
-      `;
+          
+          <!-- Comment Section -->
+          <div class="mt-4">
+            <h2>Comments</h2>
+            <form>
+              <div class="form-group">
+                <div id="comments"></div>
+                <label for="comment">Write a Comment</label>
+                <textarea class="form-control" id="comment" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary mt-2" onClick="submitComment()">Submit</button>
+            </form>
+          </div>
+        `;
 
-      // get article id from local storage
-      // local storage always stores strings, so Number is used to convert it to a number
-      var articleid = Number(localStorage.getItem("articleId"));
+        var articleid = Number(localStorage.getItem("articleId"));
 
-      // get comments for the article
-      $.ajax({
-      url: Constants.get_api_base_url() + "comments/" + article_id,
-      dataType: "json",
-      data: { article_id: articleid },
-      success: function (comments) {
-        let commentsHTML = "";
+        $.ajax({
+          url: Constants.get_api_base_url() + "comments/" + article_id,
+          dataType: "json",
+          data: { article_id: articleid },
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authentication", jwt);
+          },
+          success: function (comments) {
+            let commentsHTML = "";
 
-        comments.forEach((comment) => {
-          commentsHTML += `
-            <div class="comment">
-              <p>${comment.comment}</p>
-            </div>
-          `;
+            comments.forEach((comment) => {
+              commentsHTML += `
+                <div class="comment">
+                  <p>${comment.comment}</p>
+                </div>
+              `;
+            });
+
+            document.querySelector("#comments").innerHTML = commentsHTML;
+          },
+          error: function (xhr, status, error) {
+            if (xhr.status === 401) {
+              alert("Unauthorized access. Please log in.");
+              window.location.href = "login.html";
+            } else {
+              console.error("Error fetching comments:", status, error);
+            }
+          }
         });
+      });
+    }
 
-        document.querySelector("#comments").innerHTML = commentsHTML;
-      },
-    });
+    window.addEventListener("hashchange", getArticleById);
+
+    $(document).ready(() => {
+      getArticleById();
     });
 
+    function submitComment() {
+      event.preventDefault();
+      var comment = document.getElementById("comment").value;
+      var article_id = localStorage.getItem("articleId");
+
+      RestClient.post("comments/", { comment: comment, article_id: article_id }, function (response) {
+        console.log(response); 
+        location.reload();
+      }, function (error) {
+        console.log("Error: " + error);
+      });
+    }
   }
-
-  window.addEventListener("hashchange", getArticleById);
-
-  $(document).ready(() => {
-    getArticleById();
-  });
-
-  function submitComment() {
-    // Get the form data
-    var comment = document.getElementById("comment").value;
-    var article_id = localStorage.getItem("articleId");
-
-    // Send data to add_comment.php endpoint
-    RestClient.post("comments/", { comment: comment, article_id: article_id}, function (response) {
-      console.log(response); 
-    }, function (error) {
-      console.log("Error: " + error);
-    });
-  }
-
 </script>

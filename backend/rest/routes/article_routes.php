@@ -78,8 +78,12 @@
 
     Flight::route('DELETE /articles/@id', function($id){
         $articleService = new ArticleService();
-        $result = $articleService->delete_article($id);
-        Flight::json(['message' => 'Article deleted successfully']);
+        try {
+            $result = $articleService->delete_article($id);
+            Flight::json(['message' => 'Article deleted successfully']);
+        } catch (Exception $e) {
+            Flight::halt(500, 'Internal Server Error: ' . $e->getMessage());
+        }
     });
 
     /**
