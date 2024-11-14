@@ -13,6 +13,10 @@ class CommentService {
     public function get_Comments($article_id) {
         return $this->comment_dao->get_Comments($article_id);
     }
+
+    public function delete_comments_by_article_id($article_id) {
+        return $this->comment_dao->delete_comments_by_article_id($article_id);
+    }
 }
 
 ?>

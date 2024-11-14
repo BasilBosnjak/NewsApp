@@ -77,8 +77,11 @@
      */
 
     Flight::route('DELETE /articles/@id', function($id){
+        $commentService = new CommentService();
         $articleService = new ArticleService();
         try {
+            $commentService->delete_comments_by_article_id($id);
+            
             $result = $articleService->delete_article($id);
             Flight::json(['message' => 'Article deleted successfully']);
         } catch (Exception $e) {
