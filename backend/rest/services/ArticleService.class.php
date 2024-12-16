@@ -27,6 +27,10 @@ class ArticleService {
     public function update_article($id, $data) {
         return $this->article_dao->update_article($id, $data);
     }
+
+    public function get_articles_by_category($category) {
+        return $this->article_dao->get_by_category($category);
+    }
 }
 
 ?>

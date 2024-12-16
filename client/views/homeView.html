@@ -1,10 +1,61 @@
 <div class="container-fluid">
-  <h1 class="mt-1">Latest News</h1>
+  <div class="d-flex justify-content-between align-items-center mt-1">
+  <h1>Latest News</h1>
   <!-- Placeholder News Articles -->
   <!-- ... -->
   <!-- Add more articles as needed -->
+  <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addArticleModal">Add New Article +</button>
+</div>
   <div class="articles-container"></div>
   <!-- New div for articles -->
+</div>
+
+<!-- Modal for Adding New Article -->
+<div class="modal fade" id="addArticleModal" tabindex="-1" aria-labelledby="addArticleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addArticleModalLabel">Add New Article</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="addArticleForm">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" required>
+          </div>
+          <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-control" id="category" required>
+              <option value="">Select a category</option>
+              <option value="Politics">Politics</option>
+              <option value="Sports">Sports</option>
+              <option value="Business">Business</option>
+              <option value="Tech">Tech</option>
+              <option value="Entertainment">Entertainment</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="summary" class="form-label">Summary</label>
+            <textarea class="form-control" id="summary" rows="3" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="text" class="form-label">Text</label>
+            <textarea class="form-control" id="text" rows="5" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Image URL</label>
+            <input type="text" class="form-control" id="image">
+          </div>
+          <div class="mb-3">
+            <label for="imageUpload" class="form-label">Upload Image</label>
+            <input type="file" id="imageUpload" class="form-control" accept="image/*">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script type="module">
@@ -77,4 +128,45 @@
       });
     }
   };
+
+  $(document).ready(function () {
+    $("#addArticleForm").on("submit", function (e) {
+      e.preventDefault();
+
+      const title = $("#title").val();
+      const category = $("#category").val();
+      const summary = $("#summary").val();
+      const text = $("#text").val();
+      const image = $("#image").val();
+      const imageFile = document.getElementById("imageUpload").files[0];
+
+      $.ajax({
+        url: Constants.get_api_base_url() + "articles",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({
+          title: title,
+          category: category,
+          summary: summary,
+          text: text,
+          image: image
+        }),
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader("Authentication", jwt);
+        },
+        success: function (data) {
+          alert("Article added successfully.");
+          location.reload(); // Reload the page to update the list of articles
+        },
+        error: function (xhr, status, error) {
+          if (xhr.status === 401) {
+            alert("Unauthorized access. Please log in.");
+            window.location.href = "login.html";
+          } else {
+            console.error("Error adding article:", status, error);
+          }
+        }
+      });
+    });
+  });
 </script>

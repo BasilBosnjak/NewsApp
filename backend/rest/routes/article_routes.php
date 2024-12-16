@@ -118,4 +118,21 @@
         Flight::json(['message' => 'Article updated successfully']);
     });
 
+    /**
+     * @OA\Get(path="/articles/category/{category}",
+     * tags={"Articles"},
+     * security={
+     * {"ApiKey": {}}   
+     * },
+     * @OA\Parameter(@OA\Schema(type="string"), in="path", name="category", default="News"),
+     * @OA\Response(response="200", description="Get articles by category")
+     * )
+     */
+
+    Flight::route('GET /articles/category/@category', function($category){
+        $articleService = new ArticleService();
+        $articles = $articleService->get_articles_by_category($category);
+        Flight::json($articles);
+    });
+
 ?>

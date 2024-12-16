@@ -26,7 +26,12 @@ class ArticleDao extends BaseDao {
     public function update_article($id, $data){
         $this->update($id, $data);
     }
+
+    public function get_by_category($category){
+        return $this->query("SELECT * FROM articles WHERE category = :category", ["category" => $category]);
+    }
     
+
 }
 
 ?>
