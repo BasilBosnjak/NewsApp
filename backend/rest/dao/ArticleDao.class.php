@@ -30,7 +30,10 @@ class ArticleDao extends BaseDao {
     public function get_by_category($category){
         return $this->query("SELECT * FROM articles WHERE category = :category", ["category" => $category]);
     }
-    
+
+    public function search_articles($query) {
+        return $this->query("SELECT * FROM articles WHERE title LIKE :query OR summary LIKE :query OR text LIKE :query", ["query" => '%' . $query . '%']);
+    }
 
 }
 

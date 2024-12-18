@@ -31,6 +31,10 @@ class ArticleService {
     public function get_articles_by_category($category) {
         return $this->article_dao->get_by_category($category);
     }
+
+    public function search_articles($query) {
+        return $this->article_dao->search_articles($query);
+    }
 }
 
 ?>

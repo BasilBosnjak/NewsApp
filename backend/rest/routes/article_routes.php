@@ -135,4 +135,24 @@
         Flight::json($articles);
     });
 
+    /**
+     * @OA\Get(path="/articles/search/{query}",
+     * tags={"Articles"},
+     * security={
+     * {"ApiKey": {}}   
+     * },
+     * @OA\Parameter(@OA\Schema(type="string"), in="path", name="query", default="News"),
+     * @OA\Response(response="200", description="Search articles by query")
+     * )
+     */
+
+    Flight::route('GET /articles/search/@query', function($query){
+        $articleService = new ArticleService();
+        $articles = $articleService->search_articles($query);
+        if ($articles === false) {
+            $articles = [];
+        }
+        Flight::json($articles);
+    });
+
 ?>

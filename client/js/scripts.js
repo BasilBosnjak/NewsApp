@@ -27,15 +27,15 @@ window.addEventListener('hashchange', function() {
   var view = window.location.hash; // Get the current view
   var button = document.getElementById('addArticleButton'); // Get the button
 
-  if (view === 'admin.html') {
-    // If the current view is the one where you want to show the button,
-    // remove the 'hidden' class from the button
-    button.classList.remove('hidden');
-  } else {
-    // If the current view is not the one where you want to show the button,
-    // add the 'hidden' class to the button
-    button.classList.add('hidden');
-  }
+//   if (view === 'admin.html') {
+//     // If the current view is the one where you want to show the button,
+//     // remove the 'hidden' class from the button
+//     button.classList.remove('hidden');
+//   } else {
+//     // If the current view is not the one where you want to show the button,
+//     // add the 'hidden' class to the button
+//     button.classList.add('hidden');
+//   }
 });
 
     // Submit article form

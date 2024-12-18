@@ -1,11 +1,8 @@
 <div class="container-fluid">
   <div class="d-flex justify-content-between align-items-center mt-1">
-  <h1>Latest News</h1>
-  <!-- Placeholder News Articles -->
-  <!-- ... -->
-  <!-- Add more articles as needed -->
-  <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addArticleModal">Add New Article +</button>
-</div>
+    <h1>Latest News</h1>
+    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addArticleModal">Add New Article +</button>
+  </div>
   <div class="articles-container"></div>
   <!-- New div for articles -->
 </div>
@@ -64,8 +61,14 @@
     alert("Please Log In to continue");
     window.location.href = "login.html";
   } else {
+    const urlParams = new URLSearchParams(window.location.hash.split('?')[1]);
+    const searchQuery = urlParams.get('search') || '';
+    fetchArticles(searchQuery);
+  }
+
+  function fetchArticles(query = '') {
     $.ajax({
-      url: Constants.get_api_base_url() + "articles",
+      url: Constants.get_api_base_url() + "articles?search=" + encodeURIComponent(query),
       dataType: "json",
       beforeSend: function (xhr) {
         xhr.setRequestHeader("Authentication", localStorage.getItem("jwt"));
@@ -75,19 +78,19 @@
 
         articles.forEach((article) => {
           articlesHTML += `
-                  <div class="card mb-4">
-                      <img src="${article.image}" class="card-img-top img-fluid" alt="${article.title}" style="max-width: 540px;">
-                      <div class="card-body">
-                          <h2 class="card-title">${article.title}</h2>
-                          <p class="card-text">${article.summary}</p>
-                          <button onclick="setArticleId(${article.id})" class="btn btn-primary">Read more</button>
-                          <button onClick="deleteArticle(${article.id})" class="btn btn-danger">Delete </button>
-                      </div>
-                  </div>
-              `;
+            <div class="card mb-4">
+              <img src="${article.image}" class="card-img-top img-fluid" alt="${article.title}" style="max-width: 540px;">
+              <div class="card-body">
+                <h2 class="card-title">${article.title}</h2>
+                <p class="card-text">${article.summary}</p>
+                <button onclick="setArticleId(${article.id})" class="btn btn-primary">Read more</button>
+                <button onClick="deleteArticle(${article.id})" class="btn btn-danger">Delete</button>
+              </div>
+            </div>
+          `;
         });
 
-        document.querySelector(".articles-container").innerHTML += articlesHTML;
+        document.querySelector(".articles-container").innerHTML = articlesHTML;
       },
       error: function (xhr, status, error) {
         if (xhr.status === 401) {
