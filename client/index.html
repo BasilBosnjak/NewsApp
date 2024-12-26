@@ -26,6 +26,7 @@
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#businessView">Business</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#techView">Tech</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#entertainmentView">Entertainment</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#worldNewsView">World News</a>
             </div>
         </div>
         <!-- Page content wrapper-->
@@ -102,6 +103,10 @@
                     <section id="searchView" data-load="searchView.html">
                         <h1>Page 9</h1>
                     </section>
+
+                    <section id="worldNewsView" data-load="worldNewsView.html">
+                        <h1>Page 10</h1>
+                    </section>
                 </main>
             </section>
         </div>
@@ -141,7 +146,7 @@
             const query = document.getElementById('searchInput').value;
             localStorage.setItem('searchQuery', query);
             window.location.hash = "searchView";
-            console.log("Search Query: ahmo", query);
+            console.log("Search Query: base", query);
             fetchArticles(query);
         }
     });
