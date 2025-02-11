@@ -3,9 +3,9 @@ var Constants = {
     if(location.hostname == 'localhost') {
       return "http://localhost/NewsApp/backend/";
     } else {
-      return "https://dolphin-app-k6wnf.ondigitalocean.app/backend/";
+      return "https://whale-app-7oub2.ondigitalocean.app/";
     }
-  }
+  }``
 
     // API_BASE_URL: "http://localhost/NewsApp/backend/",
   };
