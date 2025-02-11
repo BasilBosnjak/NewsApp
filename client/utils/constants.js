@@ -5,7 +5,7 @@ var Constants = {
     } else {
       return "https://whale-app-7oub2.ondigitalocean.app/";
     }
-  }``
+  }
 
     // API_BASE_URL: "http://localhost/NewsApp/backend/",
   };
