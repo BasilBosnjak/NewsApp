@@ -81,21 +81,31 @@
         xhr.setRequestHeader("Authentication", localStorage.getItem("jwt"));
       },
       success: function (articles) {
-        let articlesHTML = "";
+        let articlesHTML = `
+          <div class="container text-center">
+            <div class="row">
+        `;
 
         articles.forEach((article) => {
           articlesHTML += `
-            <div class="card mb-4">
-              <img src="${article.image}" class="card-img-top img-fluid" alt="${article.title}" style="max-width: 540px;">
-              <div class="card-body">
-                <h2 class="card-title">${article.title}</h2>
-                <p class="card-text">${article.summary}</p>
-                <button onclick="setArticleId(${article.id})" class="btn btn-primary">Read more</button>
-                ${isAdmin ? `<button onClick="deleteArticle(${article.id})" class="btn btn-danger">Delete</button>` : ''}
+            <div class="col-sm-6 col-md-4 mb-4">
+              <div class="card">
+                <img src="${article.image}" class="card-img-top img-fluid" alt="${article.title}">
+                <div class="card-body">
+                  <h2 class="card-title">${article.title}</h2>
+                  <p class="card-text">${article.summary}</p>
+                  <button onclick="setArticleId(${article.id})" class="btn btn-primary">Read more</button>
+                  ${isAdmin ? `<button onClick="deleteArticle(${article.id})" class="btn btn-danger">Delete</button>` : ''}
+                </div>
               </div>
             </div>
           `;
         });
+
+        articlesHTML += `
+            </div> <!-- Close row -->
+          </div> <!-- Close container -->
+        `;
 
         document.querySelector(".articles-container").innerHTML = articlesHTML;
       },
