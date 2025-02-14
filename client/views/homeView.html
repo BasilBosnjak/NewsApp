@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="d-flex justify-content-between align-items-center mt-1">
     <h1>Latest News</h1>
-    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addArticleModal">Add New Article +</button>
+    <button id="addArticleButton" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addArticleModal">Add New Article +</button>
   </div>
   <div class="articles-container"></div>
   <!-- New div for articles -->
@@ -57,6 +57,8 @@
 
 <script type="module">
   const jwt = localStorage.getItem("jwt");
+  const isAdmin = localStorage.getItem("isAdmin") === 'true'; // Check if user is admin
+
   if (!jwt) {
     alert("Please Log In to continue");
     window.location.href = "login.html";
@@ -64,6 +66,11 @@
     const urlParams = new URLSearchParams(window.location.hash.split('?')[1]);
     const searchQuery = urlParams.get('search') || '';
     fetchArticles(searchQuery);
+
+    // Conditionally display the "Add New Article" button
+    if (!isAdmin) {
+      document.getElementById('addArticleButton').style.display = 'none';
+    }
   }
 
   function fetchArticles(query = '') {
@@ -84,7 +91,7 @@
                 <h2 class="card-title">${article.title}</h2>
                 <p class="card-text">${article.summary}</p>
                 <button onclick="setArticleId(${article.id})" class="btn btn-primary">Read more</button>
-                <button onClick="deleteArticle(${article.id})" class="btn btn-danger">Delete</button>
+                ${isAdmin ? `<button onClick="deleteArticle(${article.id})" class="btn btn-danger">Delete</button>` : ''}
               </div>
             </div>
           `;
