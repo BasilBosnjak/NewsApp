@@ -36,10 +36,11 @@
      * )
      */
 
-    Flight::route('POST /comments', function(){
+     Flight::route('POST /comments', function(){
         $data = Flight::request()->data->getData();
         $commentService = new CommentService();
-        $comment = $commentService->add_Comment($data['comment'], $data['article_id']);
-        Flight::json($comment);
+        $user = $_SESSION['user'];
+        $commentService->add_comment($data['comment'], $data['article_id'], $user['full_name']);
+        Flight::json(['status' => 'success']);
     });
 ?>

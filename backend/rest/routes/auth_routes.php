@@ -156,6 +156,9 @@ Flight::route('POST /login', function(){
         'HS256'
     );
 
+    // Save user information in the session
+    $_SESSION['user'] = $user;
+
     Flight::json(
         array_merge($user, ['token' => $token])
     );

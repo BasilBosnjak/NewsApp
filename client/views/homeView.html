@@ -55,6 +55,55 @@
   </div>
 </div>
 
+<!-- Modal for Editing Article -->
+<div class="modal fade" id="editArticleModal" tabindex="-1" aria-labelledby="editArticleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editArticleModalLabel">Edit Article</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="editArticleForm">
+          <input type="hidden" id="editArticleId">
+          <div class="mb-3">
+            <label for="editTitle" class="form-label">Title</label>
+            <input type="text" class="form-control" id="editTitle" required>
+          </div>
+          <div class="mb-3">
+            <label for="editCategory" class="form-label">Category</label>
+            <select class="form-control" id="editCategory" required>
+              <option value="">Select a category</option>
+              <option value="Politics">Politics</option>
+              <option value="Sports">Sports</option>
+              <option value="Business">Business</option>
+              <option value="Tech">Tech</option>
+              <option value="Entertainment">Entertainment</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="editSummary" class="form-label">Summary</label>
+            <textarea class="form-control" id="editSummary" rows="3" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="editText" class="form-label">Text</label>
+            <textarea class="form-control" id="editText" rows="5" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="editImage" class="form-label">Image URL</label>
+            <input type="text" class="form-control" id="editImage">
+          </div>
+          <div class="mb-3">
+            <label for="editImageUpload" class="form-label">Upload Image</label>
+            <input type="file" id="editImageUpload" class="form-control" accept="image/*">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script type="module">
   const jwt = localStorage.getItem("jwt");
   const isAdmin = localStorage.getItem("isAdmin") === 'true'; // Check if user is admin
@@ -95,7 +144,10 @@
                   <h2 class="card-title">${article.title}</h2>
                   <p class="card-text">${article.summary}</p>
                   <button onclick="setArticleId(${article.id})" class="btn btn-primary">Read more</button>
-                  ${isAdmin ? `<button onClick="deleteArticle(${article.id})" class="btn btn-danger">Delete</button>` : ''}
+                  ${isAdmin ? `
+                    <button onClick="editArticle(${article.id})" class="btn btn-warning">Edit</button>
+                    <button onClick="deleteArticle(${article.id})" class="btn btn-danger">Delete</button>
+                  ` : ''}
                 </div>
               </div>
             </div>
@@ -123,6 +175,36 @@
   window.setArticleId = function (articleId) {
     localStorage.setItem("articleId", articleId);
     window.location.hash = "articleView";
+  };
+
+  window.editArticle = function (articleId) {
+    $.ajax({
+      url: Constants.get_api_base_url() + "articles/" + articleId,
+      dataType: "json",
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader("Authentication", localStorage.getItem("jwt"));
+      },
+      success: function (article) {
+        // Pre-fill the form with the article's current data
+        $("#editArticleId").val(article.id);
+        $("#editTitle").val(article.title);
+        $("#editCategory").val(article.category);
+        $("#editSummary").val(article.summary);
+        $("#editText").val(article.text);
+        $("#editImage").val(article.image);
+
+        // Show the modal
+        $("#editArticleModal").modal("show");
+      },
+      error: function (xhr, status, error) {
+        if (xhr.status === 401) {
+          alert("Unauthorized access. Please log in.");
+          window.location.href = "login.html";
+        } else {
+          console.error("Error fetching article:", status, error);
+        }
+      },
+    });
   };
 
   window.deleteArticle = function (articleId) {
@@ -184,6 +266,46 @@
             window.location.href = "login.html";
           } else {
             console.error("Error adding article:", status, error);
+          }
+        }
+      });
+    });
+
+    $("#editArticleForm").on("submit", function (e) {
+      e.preventDefault();
+
+      const articleId = $("#editArticleId").val();
+      const title = $("#editTitle").val();
+      const category = $("#editCategory").val();
+      const summary = $("#editSummary").val();
+      const text = $("#editText").val();
+      const image = $("#editImage").val();
+      const imageFile = document.getElementById("editImageUpload").files[0];
+
+      $.ajax({
+        url: Constants.get_api_base_url() + "articles/" + articleId,
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify({
+          title: title,
+          category: category,
+          summary: summary,
+          text: text,
+          image: image
+        }),
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader("Authentication", jwt);
+        },
+        success: function (data) {
+          alert("Article updated successfully.");
+          location.reload(); // Reload the page to update the list of articles
+        },
+        error: function (xhr, status, error) {
+          if (xhr.status === 401) {
+            alert("Unauthorized access. Please log in.");
+            window.location.href = "login.html";
+          } else {
+            console.error("Error updating article:", status, error);
           }
         }
       });

@@ -1,4 +1,5 @@
 <?php
+session_start();
     require 'vendor/autoload.php';
     require 'rest/routes/middleware_routes.php';
     require 'rest/routes/article_routes.php';

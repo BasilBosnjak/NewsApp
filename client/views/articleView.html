@@ -50,7 +50,7 @@
             comments.forEach((comment) => {
               commentsHTML += `
                 <div class="comment">
-                  <p>${comment.comment}</p>
+                  <p><strong>${comment.full_name}</strong>: ${comment.comment}</p>
                 </div>
               `;
             });
